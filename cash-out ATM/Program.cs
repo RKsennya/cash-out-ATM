@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 
 var amounts = new Dictionary<int, int>()
 {
@@ -66,7 +66,20 @@ do
 void checkInputsuma()
 {
     int.TryParse(input, out int amt);
-    suma = amt;
+
+    if (amt % 10 != 0)
+    {
+        Console.WriteLine("Введите сумму кратную 10");
+        input = Console.ReadLine();
+        checkInputsuma();
+    }
+
+    else
+    {
+        suma = amt;
+
+    }
+    
 
 }
 
@@ -76,10 +89,17 @@ void findNotes()
     foreach (var nominal in amounts.Keys.OrderByDescending(x => x))
     {
 
+
         var count = Math.Min(suma / nominal, amounts[nominal]);
         toIssue[nominal] = count;
         suma -= count * nominal;
+
+
+
     }
+
+
+    
 
 }
 
